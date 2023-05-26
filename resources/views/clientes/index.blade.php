@@ -47,12 +47,12 @@
                             </div>
                             <div class="mb-3 col-md-2">
                                 <label for="inputPhone" class="form-label">Telefone/Celular</label>
-                                <input type="number" class="form-control" id="phone" name="phone" @error('cell') is-invalid @enderror" value="{{old('cell') ?? $users->phone ?? ""}}" placeholder="(99) 9 9999-9999">
-                            </div>
+                                <input type="text" class="form-control" id="phone" name="phone" @error('phone') is-invalid @enderror" value="{{ old('phone') ?? $cliente->phone ?? "" }}" placeholder="(99) 9 9999-9999">
+                            </div> 
                             <div class="mb-3 col-md-2">
-                                <label for="inputDate" class="form-label">Data de Nascimento</label>
-                                <input type="date" class="form-control" id="birth" name="birth" placeholder="dd/mm/aaaa">
-                            </div>             
+                                <label class="form-label">Data de Nascimento</label>
+                                <input type="text" class="form-control" data-toggle="input-mask" id="birth" name="birth" data-mask-format="00/00/0000">
+                            </div>        
                         </div>
                                   
                         <div class="row g-2">
@@ -109,7 +109,7 @@
                             </div>
                             <div class="mb-3 col-md-3">
                                 <label for="inputZip" class="form-label">CEP</label>
-                                <input type="text" class="form-control" id="inputZip" name="code">
+                                <input type="text" id="code" class="form-control" name="code" placeholder="Código Postal (CEP)">
                             </div>
                         </div>
                     
@@ -128,12 +128,23 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        
-        $("input[id='phone']").mask('(99) 9999-9999');
-        $("input[id='birth']").mask('99-99-9999');
-    })
+@endsection
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="{{ asset('admin/validate-additional-methods.js') }}"></script>
+<script src="{{ asset('admin/validate-messages_pt_BR.js') }}"></script>
+<script src="{{ asset('admin/maskedinput.js') }}"></script>
+
+<script>  
+$(document).ready(function() {
+    $("#code").mask('99999-999');
+    $("#birth").mask('99/99/9999');
+    $("#phone").mask('(99) 9999-9999');
+});
 </script>
 
 @endsection
+
+
+

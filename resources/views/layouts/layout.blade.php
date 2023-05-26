@@ -14,9 +14,6 @@
         <!-- Daterangepicker css -->
         <link rel="stylesheet" href="{{ url('assets/vendor/daterangepicker/daterangepicker.css') }}">
 
-        <!-- Vector Map css -->
-        <link rel="stylesheet" href="{{ url('assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css') }}">
-
         <!-- Theme Config Js -->
         <script src="{{ url('assets/js/hyper-config.js') }}"></script>
 
@@ -1029,14 +1026,11 @@
                         <button type="button" class="btn btn-light w-100" id="reset-layout">Reset</button>
                     </div>
                     <div class="col-6">
-                        <a href="https://themes.getbootstrap.com/product/hyper-responsive-admin-dashboard-template/" target="_blank" role="button" class="btn btn-primary w-100">Buy Now</a>
+                        <a href="{{ asset('https://themes.getbootstrap.com/product/hyper-responsive-admin-dashboard-template/') }}" target="_blank" role="button" class="btn btn-primary w-100">Buy Now</a>
                     </div>
                 </div>
             </div>
         </div> 
-
-                
-        @yield('scripts')
         
         <!-- Vendor js -->
         <script src="{{ url('assets/js/vendor.min.js') }}"></script>
@@ -1044,16 +1038,6 @@
         <!-- Daterangepicker js -->
         <script src="{{ url('assets/vendor/daterangepicker/moment.min.js') }}"></script>
         <script src="{{ url('assets/vendor/daterangepicker/daterangepicker.js') }}"></script>
-        
-        <!-- Apex Charts js -->
-        <script src="{{ url('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
-
-        <!-- Vector Map js -->
-        <script src="{{ url('assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
-        <script src="{{ url('assets/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js') }}"></script>
-
-        <!-- Dashboard App js -->
-        <script src="{{ url('assets/js/pages/demo.dashboard.js') }}"></script>
 
         <!-- App js -->
         <script src="{{ url('assets/js/app.min.js') }}"></script>
@@ -1068,11 +1052,6 @@
         <!-- demo js -->
         <script src="{{ url('assets/js/ui/component.dragula.js') }}"></script>
 
-        <!-- Inclua o jQuery -->
-        <script src="{{ url('https://code.jquery.com/jquery-3.6.0.min.js') }}"></script>
-
-        <!-- Inclua o Inputmask -->
-        <script src="{{ url('https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js') }}"></script>
-
+        @yield('scripts')
     </body>
 </html> 

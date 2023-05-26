@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Clientes;
 use Illuminate\Http\Request;
 
@@ -25,44 +26,38 @@ class ClientesController extends Controller
     {
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => 'required',
-            'birth' => 'required|date', // Certifique-se de que o campo birth seja validado como uma data
-            'state' => 'required',
-            'code' => 'required',
-            'number' => 'required',
-            'city' => 'required',
-            'borhood' => 'required',
-            'street' => 'required',
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:clientes,email'],
+            'birth' => ['required', 'string'],
+            'state' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'borhood' => ['required', 'string', 'max:255'],
+            'street' => ['required', 'string', 'max:255'],
+            'number' => ['required', 'integer', 'max:99999'],
+            'phone' => ['required', 'string', 'regex:/^\([1-9]{2}\) [2-9][0-9]{3,4}\-[0-9]{4}$/'],
+            'code' => ['required', 'regex:/^\d{5}-\d{3}$/'],
         ]);
-
-        if(!empty($request->input('date_birth'))):
-            $birth = date('Y-m-d', strtotime($request->input('birth')));
-            $request->merge(['birth' => $birth]);
-        endif;
-
-        $birth = strtotime($validatedData['birth']);
-        if ($birth === false) {
-            // Lida com o erro de formato de data inválido
+        
+        try {
+            $birth = Carbon::createFromFormat('d/m/Y', $validatedData['birth']);
+        } catch (\Exception $e) {
             return redirect()->back()->withErrors(['birth' => 'A data de nascimento é inválida.'])->withInput();
-        } else {
-            $cliente = new Clientes;
-            $cliente->name = $validatedData['name'];
-            $cliente->email = $validatedData['email'];
-            $cliente->phone = $validatedData['phone'];
-            $cliente->code = $validatedData['code'];
-            $cliente->birth = date('d-m-Y', $birth);
-            $cliente->state = $validatedData['state'];
-            $cliente->number = $validatedData['number'];
-            $cliente->city = $validatedData['city'];
-            $cliente->borhood = $validatedData['borhood'];
-            $cliente->street = $validatedData['street'];
-            // Preencha outros campos do cliente conforme necessário
-
-            $cliente->save();
-
-            return redirect()->route('clientes.index')->with('success', 'Cliente cadastrado com sucesso.');
         }
+
+        $cliente = new Clientes;
+        $cliente->name = $validatedData['name'];
+        $cliente->email = $validatedData['email'];
+        $cliente->phone = $validatedData['phone'];
+        $cliente->code = $validatedData['code'];
+        $cliente->birth = $birth->toDateString();
+        $cliente->state = $validatedData['state'];
+        $cliente->number = $validatedData['number'];
+        $cliente->city = $validatedData['city'];
+        $cliente->borhood = $validatedData['borhood'];
+        $cliente->street = $validatedData['street'];
+
+        $cliente->save();
+
+        return redirect()->route('clientes.index')->with('success', 'Cliente cadastrado com sucesso.');
     }
 
     // Exibe a lista de clientes
@@ -88,39 +83,38 @@ class ClientesController extends Controller
     public function update(Request $request, Clientes $client)
     {
         $validatedData = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
-            'code' => 'required',
-            'birth' => 'required|date', // Certifique-se de que o campo birth seja validado como uma data
-            'state' => 'required',
-            'number' => 'required',
-            'city' => 'required',
-            'borhood' => 'required',
-            'street' => 'required',
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:clientes,email'],
+            'birth' => ['required', 'string'],
+            'state' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'borhood' => ['required', 'string', 'max:255'],
+            'street' => ['required', 'string', 'max:255'],
+            'number' => ['required', 'integer', 'max:99999'],
+            'phone' => ['required', 'string', 'regex:/^\([1-9]{2}\) [2-9][0-9]{3,4}\-[0-9]{4}$/'],
+            'code' => ['required', 'regex:/^\d{5}-\d{3}$/'],
         ]);
 
-        $birth = strtotime($validatedData['birth']);
-        if ($birth === false) {
-            // Lida com o erro de formato de data inválido
+        try {
+            $birth = Carbon::createFromFormat('d/m/Y', $validatedData['birth']);
+        } catch (\Exception $e) {
             return redirect()->back()->withErrors(['birth' => 'A data de nascimento é inválida.'])->withInput();
-        } else {
-            $client->name = $validatedData['name'];
-            $client->email = $validatedData['email'];
-            $client->phone = $validatedData['phone'];
-            $client->code = $validatedData['code'];
-            $client->birth = date('d-m-Y', $birth);
-            $client->state = $validatedData['state'];
-            $client->number = $validatedData['number'];
-            $client->city = $validatedData['city'];
-            $client->borhood = $validatedData['borhood'];
-            $client->street = $validatedData['street'];
-            // Preencha outros campos do cliente conforme necessário
-
-            $client->save();
-
-            return redirect()->route('clientes.index')->with('success', 'Cliente atualizado com sucesso!');
         }
+
+        $client->name = $validatedData['name'];
+        $client->email = $validatedData['email'];
+        $client->phone = $validatedData['phone'];
+        $client->code = $validatedData['code'];
+        $client->birth = $birth->toDateString();
+        $client->state = $validatedData['state'];
+        $client->number = $validatedData['number'];
+        $client->city = $validatedData['city'];
+        $client->borhood = $validatedData['borhood'];
+        $client->street = $validatedData['street'];
+
+        $client->save();
+
+        return redirect()->route('clientes.show', $client->id)->with('success', 'Cliente atualizado com sucesso!');
     }
 
     public function editarPerfil($id)
@@ -139,37 +133,39 @@ class ClientesController extends Controller
         // Verifique se o cliente existe ou retorne um erro caso contrário
 
         // Valide os campos do formulário conforme suas necessidades
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
-            'code' => 'required',
-            'birth' => 'required|date', // Certifique-se de que o campo birth seja validado como uma data
-            'state' => 'required',
-            'number' => 'required',
-            'city' => 'required',
-            'borhood' => 'required',
-            'street' => 'required',
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:clientes,email'],
+            'birth' => ['required', 'string'],
+            'state' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'borhood' => ['required', 'string', 'max:255'],
+            'street' => ['required', 'string', 'max:255'],
+            'number' => ['required', 'integer', 'max:99999'],
+            'phone' => ['required', 'string', 'regex:/^\([1-9]{2}\) [2-9][0-9]{3,4}\-[0-9]{4}$/'],
+            'code' => ['required', 'regex:/^\d{5}-\d{3}$/'],
         ]);
 
-        // Atualize os dados do cliente com base nos campos enviados no formulário
-        $cliente->name = $request->input('name');
-        $cliente->email = $request->input('email');
-        $cliente->phone = $request['phone'];
-        $cliente->code = $request['code'];
-        $cliente->birth = date('d-m-Y');
-        $cliente->state = $request['state'];
-        $cliente->number = $request['number'];
-        $cliente->city = $request['city'];
-        $cliente->borhood = $request['borhood'];
-        $cliente->street = $request['street'];
+        try {
+            $birth = Carbon::createFromFormat('d/m/Y', $validatedData['birth']);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['birth' => 'A data de nascimento é inválida.'])->withInput();
+        }
 
-        // Salve as alterações no banco de dados
+        $cliente->name = $validatedData['name'];
+        $cliente->email = $validatedData['email'];
+        $cliente->phone = $validatedData['phone'];
+        $cliente->code = $validatedData['code'];
+        $cliente->birth = $birth->toDateString();
+        $cliente->state = $validatedData['state'];
+        $cliente->number = $validatedData['number'];
+        $cliente->city = $validatedData['city'];
+        $cliente->borhood = $validatedData['borhood'];
+        $cliente->street = $validatedData['street'];
+
         $cliente->save();
 
         // Redirecione o usuário para a página de exibição do perfil do cliente ou outra rota desejada
         return redirect()->route('clientes.ver', $cliente->id);
     }
-
-
 }

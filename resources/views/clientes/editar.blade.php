@@ -39,41 +39,41 @@
                         <div class="row g-2">
                             <div class="mb-3 col-md-4">
                                 <label for="inputName" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="name" name="name" value="{{ $cliente->name }}">
+                                <input type="text" class="form-control" id="name" name="name" @error('name') is-invalid @enderror" value="{{ old('name') ?? $cliente->name ?? "" }}">
                             </div>
                             <div class="mb-3 col-md-4">
                                 <label for="inputEmail4" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="inputEmail4" name="email" value="{{ $cliente->email }}">
+                                <input type="email" class="form-control" id="inputEmail4" name="email" @error('email') is-invalid @enderror" value="{{ old('email') ?? $cliente->email ?? "" }}">
                             </div>
                             <div class="mb-3 col-md-2">
                                 <label for="inputPhone" class="form-label">Telefone/Celular</label>
-                                <input type="number" class="form-control" id="phone" name="phone" @error('phone') is-invalid @enderror value="{{ $cliente->phone }}">
-                            </div>
+                                <input type="text" class="form-control" id="phone" name="phone" @error('phone') is-invalid @enderror" value="{{ old('phone') ?? $cliente->phone ?? "" }}" placeholder="(99) 9 9999-9999">
+                            </div> 
                             <div class="mb-3 col-md-2">
-                                <label for="inputDate" class="form-label">Data de Nascimento</label>
-                                <input type="date" class="form-control" id="birth" name="birth" value="{{ $cliente->birth }}">
-                            </div>             
+                                <label class="form-label">Data de Nascimento</label>
+                                <input type="text" class="form-control" data-toggle="input-mask" id="birth" name="birth" data-mask-format="00/00/0000" @error('birth') is-invalid @enderror" value="{{ old('birth') ?? date('d-m-Y', strtotime($cliente->birth)) ?? "" }}">
+                            </div>              
                         </div>
                                   
                         <div class="row g-2">
                             <div class="mb-3 col-md-6">
                                 <label for="inputAddress" class="form-label">Rua</label>
-                                <input type="text" class="form-control" id="inputAddress" name="street" value="{{ $cliente->street }}">
+                                <input type="text" class="form-control" id="inputAddress" name="street" @error('street') is-invalid @enderror" value="{{ old('street') ?? $cliente->street ?? "" }}">
                             </div>
                             <div class="mb-3 col-md-3">
                                 <label for="inputAddress" class="form-label">Bairro</label>
-                                <input type="text" class="form-control" id="inputAddress" name="borhood" value="{{ $cliente->borhood }}">
+                                <input type="text" class="form-control" id="inputAddress" name="borhood" @error('borhood') is-invalid @enderror" value="{{ old('borhood') ?? $cliente->borhood ?? "" }}">
                             </div>
                             <div class="mb-3 col-md-3">
                                 <label for="inputAddress" class="form-label">Número</label>
-                                <input type="text" class="form-control" id="inputAddress" name="number" value="{{ $cliente->borhood }}">
+                                <input type="text" class="form-control" id="inputAddress" name="number" @error('number') is-invalid @enderror" value="{{ old('number') ?? $cliente->number ?? "" }}">
                             </div>
                         </div>
                                     
                         <div class="row g-2">
                             <div class="mb-3 col-md-6">
                                 <label for="inputCity" class="form-label">Cidade</label>
-                                <input type="text" class="form-control" id="inputCity" name="city" value="{{ $cliente->city }}">
+                                <input type="text" class="form-control" id="inputCity" name="city" @error('city') is-invalid @enderror" value="{{ old('city') ?? $cliente->city ?? "" }}">
                             </div>
                             <div class="mb-3 col-md-3">
                                 <label for="inputState" class="form-label">Estado</label>
@@ -109,7 +109,7 @@
                             </div>
                             <div class="mb-3 col-md-3">
                                 <label for="inputZip" class="form-label">CEP</label>
-                                <input type="text" class="form-control" id="inputZip" name="code" value="{{ $cliente->code }}">
+                                <input type="text" class="form-control" id="inputZip" name="code" @error('code') is-invalid @enderror" value="{{ old('code') ?? $cliente->code ?? "" }}">
                             </div>
                         </div>
                     

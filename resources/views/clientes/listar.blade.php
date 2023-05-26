@@ -133,13 +133,19 @@
                                             <span class="text-center">{{ $cliente->street }}</span>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2">
+                                        <div class="form-group">
+                                            <strong>Nº:</strong>
+                                            <span class="text-center">{{ $cliente->number }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                         <div class="form-group">
                                             <strong>Bairro:</strong>
                                             <span class="text-center">{{ $cliente->borhood }}</span>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                         <div class="form-group">
                                             <strong>Cidade:</strong>
                                             <span class="text-center">{{ $cliente->city }}</span>
@@ -162,4 +168,20 @@
     </div> <!-- container-fluid -->
 </div>
 <!-- end card -->
+@endsection
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="{{ asset('admin/validate-additional-methods.js') }}"></script>
+<script src="{{ asset('admin/validate-messages_pt_BR.js') }}"></script>
+<script src="{{ asset('admin/maskedinput.js') }}"></script>
+
+<script>  
+$(document).ready(function() {
+    $("#code").mask('99999-999');
+    $("#birth").mask('99/99/9999');
+    $("#phone").mask('(99) 9999-9999');
+});
+</script>
+
 @endsection
