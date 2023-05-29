@@ -18,6 +18,9 @@
         <script src="{{ url('assets/js/hyper-config.js') }}"></script>
 
         <!-- App css -->
+        <link href="{{ url('assets/css/app-saas.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
+
+        <!-- App css -->
         <link href="{{ url('assets/css/app-creative.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
 
         <!-- Icons css -->
@@ -33,6 +36,9 @@
 
         <script src="{{ url('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js') }}"></script>
         <script src="{{ url('https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js') }}"></script>
+
+        <!-- Select2 Plugins css -->
+        <link href="{{ url('assets/vendor/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -260,18 +266,18 @@
 
                     <ul class="side-nav">
                         <li class="side-nav-item">
-                            <a class="side-nav-link" href="{{ route('clientes.index') }}">
+                            <a class="side-nav-link" href="{{ route('projetos.create') }}">
                                 <i class="uil-home-alt"></i>
-                                <span>Cadastrar Dizimista</span>
+                                <span>Criar Projeto</span>
                             </a>
                         </li>
                     </ul>
 
                     <ul class="side-nav">
                         <li class="side-nav-item">
-                            <a class="side-nav-link" href="{{ route('clientes.listar') }}">
+                            <a class="side-nav-link" href="{{ route('projetos.index') }}">
                                 <i class="uil-home-alt"></i>
-                                <span>Lista de Dizimista</span>
+                                <span>Projetos</span>
                             </a>
                         </li>
                     </ul>
@@ -280,7 +286,7 @@
                         <li class="side-nav-item">
                             <a class="side-nav-link" href="{{ route('produtos.index') }}">
                                 <i class="uil-home-alt"></i>
-                                <span>Lista de Doações</span>
+                                <span>Lista de Clientes</span>
                             </a>
                         </li>
                     </ul>
@@ -309,7 +315,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6">
-                                <script>document.write(new Date().getFullYear())</script> © Hyper - Coderthemes.com
+                                <link>document.write(new Date().getFullYear())</link> © Hyper - Coderthemes.com
                             </div>
                             <div class="col-md-6">
                                 <div class="text-md-end footer-links d-none d-md-block">

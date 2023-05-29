@@ -133,7 +133,7 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div class="mb-3">
-                                            <label for="task-title" class="form-label">Nome do Dizimista</label>
+                                            <label for="task-title" class="form-label">Nome do Cliente</label>
                                             <input type="text" class="form-control form-control-light" id="task-title" placeholder="Preencha o nome do responsável pela doação">
                                         </div>
                                     </div>

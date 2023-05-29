@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\ProjetoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,4 +37,14 @@ Route::get('/produtos/{produto}', [ProdutosController::class, 'show'])->name('pr
 Route::get('/produtos/{produto}/edit', [ProdutosController::class, 'edit'])->name('produtos.editar');
 Route::put('/produtos/{produto}', [ProdutosController::class, 'update'])->name('produtos.update');
 Route::delete('/produtos/{produto}', [ProdutosController::class, 'destroy'])->name('produtos.destroy');
+
+// Rota para exiber Etapa Projeto
+Route::get('/projetos', [ProjetoController::class, 'index'])->name('projetos.index');
+Route::get('/projetos/create', [ProjetoController::class, 'create'])->name('projetos.create');
+Route::post('/projetos', [ProjetoController::class, 'store'])->name('projetos.store');
+Route::get('/projetos/details', [ProjetoController::class, 'details'])->name('projetos.details');
+Route::get('/projetos/{projeto}', [ProjetoController::class, 'show'])->name('projetos.show');
+Route::get('/projetos/{projeto}/edit', [ProjetoController::class, 'edit'])->name('projetos.edit');
+Route::put('/projetos/{projeto}', [ProjetoController::class, 'update'])->name('projetos.update');
+Route::delete('/projetos/{projeto}', [ProjetoController::class, 'destroy'])->name('projetos.destroy');
 
