@@ -24,7 +24,7 @@
 
     <div class="row mb-2">
         <div class="col-sm-4">
-            <a href="apps-projects-add.html" class="btn btn-danger rounded-pill mb-3"><i class="mdi mdi-plus"></i> Create Project</a>
+            <a href="{{ url('projetos/create') }}" class="btn btn-danger rounded-pill mb-3"><i class="mdi mdi-plus"></i> Create Project</a>
         </div>
         <div class="col-sm-8">
             <div class="text-sm-end">
@@ -68,7 +68,7 @@
                     </div>
                     <!-- project title-->
                     <h4 class="mt-0">
-                        <a href="apps-projects-details.html" class="text-title">App design and development</a>
+                        <a href="{{ url('projetos/details') }}" class="text-title">App design and development</a>
                     </h4>
                     <div class="badge bg-success">Finished</div>
 
