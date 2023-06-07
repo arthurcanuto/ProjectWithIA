@@ -7,17 +7,17 @@ services:
         image: 'redis:alpine'
 
     mysql:
-        image: 'mysql:8.0'
+        image: 'mysql:5.7'
         working_dir: /application
         volumes:
             - '.:/application'
         environment:
             - MYSQL_ROOT_PASSWORD=vacapreta
-            - MYSQL_DATABASE=mvc
+            - MYSQL_DATABASE=project-task
             - MYSQL_USER=root
             - MYSQL_PASSWORD=vacapreta
         ports:
-            - '21002:3306'
+            - '24002:3306'
 
     webserver:
         image: 'nginx:alpine'
@@ -26,11 +26,11 @@ services:
             - '.:/application'
             - './phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf'
         ports:
-            - '21000:80'
+            - '24000:80'
 
     php-fpm:
         build: phpdocker/php-fpm
         working_dir: /application
         volumes:
             - '.:/application'
-            - './phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/8.2/fpm/conf.d/99-overrides.ini'
+            - './phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/8.1/fpm/conf.d/99-overrides.ini'
