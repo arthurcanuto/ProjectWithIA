@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ServicoController;
-use App\Http\Controllers\SobreController;
+use App\Http\Controllers\SeriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +14,11 @@ use App\Http\Controllers\SobreController;
 |
 */
 
+Route::get('/', [SeriesController::class, 'index'])->name('listar_series');
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['controller' => SeriesController::class], function () {
+    Route::get('/series/criar', 'create')->name('form_criar_serie');
+    Route::post('/series/criar', 'store');
+    Route::delete('/series/{id}', 'destroy');
 });
-
-Route::get('/servico', [ServicoController::class, 'index'])->name('servico.index');
-
-Route::get('/sobre', [SobreController::class, 'index'])->name('sobre.index');
-
 
